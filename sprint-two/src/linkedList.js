@@ -4,52 +4,31 @@ var makeLinkedList = function(){
   list.tail = null;
 
   list.addToTail = function(value){
-   var node = makeNode(value);
+    var node = makeNode(value);
 
-   if(list.head === null){
-    list.head = node;
-   }else{
-    list.tail.next = node;
-   }
+    if(list.head === null){
+      list.head = node;
+    }else{
+      list.tail.next = node;
+    }
 
-   list.tail = node;
-
-
-
-
-
-
-    // list[value] = list.tail.value;
-    // if (list[value] === null){
-    //   list.head.value = value;
-    // }
-    // list.tail.value = value;
+    list.tail = node;
   };
 
   list.removeHead = function(){
 
     list.head = list.head.next;
-
-
-
-    // var key= list.tail.value;
-    // while (list[key] !== list.head.value){
-    //   key = list[key];
-    // }
-    // delete list[list.head.value];
-    // list[key] = null;
-    // list.head.value = key;
   };
 
   list.contains = function(target, node){
-    // var key = list.tail.value;
-    // while (key !== null){
-    //   if (key === target){
-    //     return true;
-    //   }
-    //   key = list[key];
-    // }
-    // return false;
+    node = node || list.head;
+    if(node.value === target){
+      return true;
+    }else if(node.next === null){
+      return false;
+    }
+
+    return list.contains(target, node.next);
   };
 
   return list;
