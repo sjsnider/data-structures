@@ -12,6 +12,15 @@ describe("linkedList", function() {
     expect(linkedList).to.have.property('head')
     expect(linkedList).to.have.property('tail')
   });
+  it("should have a previous value", function() {
+    //linkedList.addToTail(2);
+    linkedList.addToHead(3);
+    expect(linkedList.tail).to.have.property('previous');
+    expect(linkedList.head).to.have.property('previous');
+    expect(linkedList.head.value).to.equal(3);
+    expect(linkedList.tail.value).to.equal(3);
+    expect(linkedList.tail.previous).to.equal(null);
+  });
 
   it("should have methods named 'addToTail', 'removeHead', and 'contains'", function() {
     expect(linkedList.addToTail).to.be.a('function');
@@ -30,10 +39,16 @@ describe("linkedList", function() {
     linkedList.addToTail(4);
     linkedList.addToTail(5);
     expect(linkedList.head.value).to.equal(4);
-    console.log(linkedList)
-    linkedList.removeHead();
-        console.log(linkedList) 
+    expect(linkedList.removeHead()).to.equal(4);
     expect(linkedList.head.value).to.equal(5);
+  });
+
+  it("should remove the tail from the list when removeTail is called", function(){
+    linkedList.addToTail(4);
+    linkedList.addToTail(5);
+    expect(linkedList.tail.value).to.equal(5);
+    expect(linkedList.removeTail()).to.equal(5);
+    expect(linkedList.tail.value).to.equal(4);
   });
 
   it("should contain a value that was added", function(){

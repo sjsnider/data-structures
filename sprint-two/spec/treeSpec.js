@@ -19,6 +19,23 @@ describe("tree", function() {
     expect(tree.children[0].value).to.equal(5);
   });
 
+   it("should add a parent to the tree", function() {
+    tree.addChild(5);
+    tree.children[0].addChild(10);
+    expect(tree.children[0].parent).to.equal(tree);
+    expect(tree.children[0].parent.value).to.equal(undefined);
+    expect(tree.children[0].children[0].parent.value).to.equal(5);
+  });
+
+    it("should remove a tree from its parent", function() {
+    tree.addChild(5);
+    tree.addChild(7);
+    tree.children[0].addChild(10);
+    tree.children[0].addChild(8);
+    tree.children[0].removeFromParent();
+    expect(tree.children[0].value).to.equal(7);
+  });
+
   it("should return true for a value that the tree contains", function(){
     tree.addChild(5);
     assert.isTrue(tree.contains(5));
